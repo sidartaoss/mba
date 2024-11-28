@@ -200,7 +200,7 @@ Temos duas formas de acesso principal à utilização das Gateways:
 
 Quando deve-se utilizar? 
 
-Recomenda-se utilizar quando se trabalha com muitos CRUD's. Imagine que vai se criar um ERP em nesse ERP, há um monte de recursos que são, basicamente, Inserir, Editar, Ler, Deletar. Dependendo da situação, trabalhar com Table Data ou Row Data faz muito sentido.
+Recomenda-se utilizar quando se trabalha com muitos CRUD's. Imagine que vai ser criado um ERP e, nesse ERP, há um monte de recursos que são, basicamente: Inserir, Editar, Ler, Deletar. Dependendo da situação, trabalhar com Table Data ou Row Data faz muito sentido.
 
 É possível, também, pegar uma parte simples do sistema e implementar tudo isso. Por outro lado, quando for mapear o domínio complexo, nesse caso, pode-se utilizar um Data Mapper.
 
