@@ -188,6 +188,8 @@ Ambas as abordagens tendem a deixar o modelo de domínio de lado e são muito ma
 Objeto (Abstração) que encapsula e acessa sistemas ou recursos externos.
 ``
 
+Gateways representam o acesso da porta para fora (externo).
+
 Temos duas formas de acesso principal à utilização das Gateways:
 
 - Row Data Gateway:
@@ -195,6 +197,20 @@ Temos duas formas de acesso principal à utilização das Gateways:
 
 - Table Data Gateway:
     - Estrutura genérica de tabelas que imitam a natureza tabular de um banco de dados - Record Set (uma classe por objeto de tabela). A idéia é simular como se tivesse a tabela inteira do banco de dados em memória dentro dos objetos.
+
+Quando deve-se utilizar? 
+
+Recomenda-se utilizar quando se trabalha com muitos CRUD's. Imagine que vai se criar um ERP em nesse ERP, há um monte de recursos que são, basicamente, Inserir, Editar, Ler, Deletar. Dependendo da situação, trabalhar com Table Data ou Row Data faz muito sentido.
+
+É possível, também, pegar uma parte simples do sistema e implementar tudo isso. Por outro lado, quando for mapear o domínio complexo, nesse caso, pode-se utilizar um Data Mapper.
+
+Então, não é necessário ser escravo de apenas um padrão para trabalhar na aplicação. Por isso que é importante entender os padrões que existem. Aí, vai se buscar como implementar cada padrão e, obviamente, hoje em dia, a maioria dos frameworks têm todos os padrões implementados.
+
+Regra 1: não deve-se ficar escravo de somente um padrão.
+
+É necessário conhecer mais padrões, utilizar esses padrões quando convém; combinar a utilização desses padrões.
+
+Mas, ponto principal: deve-se deixar isso de forma cada vez mais expressiva no software, porque é comum de se ver muitos desenvolvedores conhecerem apenas um, aí, vê-se coisa misturada e fala-se que o software é uma bagunça; mas não é uma bagunça: apenas utilizou-se o padrão certo para a ocasião certa, foi feito essa combinação dentro do seu software.
 
 ## Table Module (Domain Logic)
 
@@ -312,9 +328,97 @@ Como realizar compensações?
 
 É por isso que falamos em um padrão chamado de Unit of Work.
 
+## Unit of Work
+
 O padrão Unit of Work mantém uma lista de objetos afetados por uma transação de negócios e coordena as mudanças e os problemas de concorrência. 
 
-Todas as listas que você for ter de objetos que você for fazer uma transação, você adiciona isso em uma unidade de trabalho e, então, essa unidade de trabalho vai ter um mapeamento de tudo o que está sendo alterado ou inserido. 
+Todas as listas que você for ter de objetos que você for fazer uma transação, você adiciona em uma unidade de trabalho e, então, essa unidade de trabalho vai ter um mapeamento de tudo o que está sendo alterado ou inserido.
 
 Quando você tiver tudo isso mapeado, você apenas executa um commit e ele vai fazer essa mágica de fazer todas essas alterações.
+
+Um determinado objeto é jogado dentro do Unit of Work, que gerencia esse objeto e coordena as transações que devem ser realizadas em conjunto para esse objeto, resolvendo, inclusive, problemas de concorrência.
+
+O Unit of Work contém, conceitualmente, algumas funções que são implementadas, mas não precisam, necessariamente, ter esses nomes:
+
+- RegisterNew: Um novo objeto que foi criado durante a execução (Insert);
+- RegisterDirty: Objeto já existe que foi carregado e modificado (Update);
+- RegisterClean: Objeto recuperado, mas não modificado (Não acontece nada no banco de dados, nem inserção nem alteração);
+- RegisterDelete: Objeto recuperado e marcado para remoção;
+- Commit: Persiste a transação no banco de dados.
+
+## Identity Map
+
+Garante que cada objeto é carregado apenas uma vez e o mantém em um mapa de controle. Quando há busca pelo objeto, primeiramente, ela é realizada pelo mapa.
+
+Cria um map, e esse map define: esse objeto x tem esses dados, esse objeto y tem esses dados, esse objeto z tem esses dados, etc., e você guarda todas as informações. 
+
+Todas às vezes que esses objetos são modificados, pode-se, também, eventualmente, trabalhar nessas mudanças no Identity Map. 
+
+É possível utilizar em combinação com Data Mapper e, inclusive, com Unit of Work.
+
+É uma estrutura de dados.
+
+O carregamento das entidades é realizado em memória.
+
+Garante o carregamento das entidades apenas uma vez.
+
+Melhora a performance e remove inconsistências. Por exemplo, obtém um dado do banco e traz um registro em um objeto. Então, ao chamar-se novamente, temos 2 objetos diferentes representando o mesmo dado no banco. 
+
+Então, o que que acontece? Para evitar um bug no sistema, o Identity Map consegue fazer essa camada de abstração, para que se consiga ter acesso somente uma vez aos dados desse registro.
+
+Mantém o controle dos objetos que foram criados, modificados ou marcados para remoção, para ser utilizado em conjunto com o Unit of Work no momento em que tem que adicionar os objetos, para que se possa, depois, dar o commit no Unit of Work.
+
+Esses objetos são armazenados em uma estrutura de dados e essa estrutura de dados é o nosso Identity Map, na maioria das vezes. Então, o Unit of Work irá acessar esse map para conseguir realizar as transações que deverão, posteriormente, ser utilizadas.
+
+## Lazy Loading
+
+Ao buscar registros, às vezes, existem dados nesses registros que você não sabe se você vai precisar deles ainda ou não.
+
+Então, para que você não gere um consumo muito grande de memória, você faz a solicitação dos dados. E esses dados ainda não batem no banco de dados, temos uma espécie de um proxy; esse proxy simplesmente marca: se alguém chamar esses dados realmente, o proxy vai e bate no banco de dados e traz os dados, senão, temos o objeto fake, dizendo que tem todos os dados.
+
+Ajuda a evitar ficar batendo no banco de dados o tempo inteiro, consegue trazer os dados somente quando precisar e, ainda assim, é possível trabalhar com os seus objetos normalmente, por quê? Porque ele insere nos objetos que ele não carregou um objeto fake. E, quando você chamar o objeto fake, ele chama o proxy e traz os dados.
+
+Um objeto que não possui todos os dados que você talvez precise, mas sabe onde buscá-lo. Carrega os dados somente quando necessário. No carregamento inicial, ao invés de ter os dados reais, esses dados são substituídos por proxies (apenas representações do objeto real, sem dados).
+
+Quando os dados relacionados são acessados, o proxy carrega os dados do banco de dados.
+
+Cuidado enorme com N+1. Imagine que você deseja buscar os pedidos, então, o Lazy Loading não faz o carregamento total (eager). Mas, vamos imaginar que, nesse momento, é preciso fazer consultas individuais desses pedidos, E, aí, ele vai realizar uma pancada de consultas, resultando no problema do N+1.
+
+Ou seja, para cada registro, é feito uma consulta. Quando não se utiliza o carregamento lazy, normalmente, com apenas uma query sql, é possível trazer todos os dados de uma vez, sem precisar fazer um monte de consultas. 
+
+Então, é sempre recomendável colocar um log para ver quais são as queries que o ORM está fazendo, somente para você garantir que não haverá o problema do N+1. O problema do N+1 pode acabar com a performance da aplicação, fazendo, na seqüência, também, que o banco de dados se torne um gargalo.
+
+## Repository
+
+Mediação entre a camada de domínio e a camada de dados, usando uma interface para acessar os objetos de domínio.
+
+Toda vez que for necessário que o domínio recupere dados, será utilizado uma interface. Essa interface é a interface que a sua abstração de dados vai implementar para receber os dados de domínio.
+
+Qual a diferença disso com Data Mapper? 
+
+Data Mapper apenas faz o mapeamento entre uma entidade de mapeamento com o banco de dados - isso é totalmente independente do seu domínio da aplicação.
+
+Já o repository é diferente - ele vai ter os seus objetos de domínio, as entidades de domínio, os agregados, os value objects, então, na camada de domínio, vai ser criado uma interface (abstração).
+
+Nessa interface, quando for necessário recuperar todos os registros, define-se um findAll; quando for necessário recuperar um registro por id, define-se um findById; quando eu precisar inserir, define-se um método de insert.
+
+Então, é a camada de domínio que está definindo como os dados vão chegar para ela. O Data Mapper apenas mapeia a entidade com o banco de dados e traz o retorno; o Repository cria uma interface de domínio (por isso que a gente fala que Repository é um serviço de domínio e não um serviço de aplicação).
+
+Existem pessoas que, para facilitar o acesso, colocam dentro da pasta de application, alguns autores fazem isso, mas se trata de um serviço de domínio e não um serviço de aplicação - quem está determinando como os dados vão ser retornados é o domínio e não a sua aplicação, porque, caso contrário, você teria apenas um Data Mapper.
+
+Mediação entre os objetos de domínio e o Data Mapper.
+
+Recebe os objetos de domínio, atendendo uma especificação; essa especificação é a interface.
+
+Retorna os objetos de domínio. Sempre vai retornar o objeto do domínio.
+
+Normalmente, faz diferentes combinações de especificações, gerando o SQL desejado para atender um critério.
+
+Muito comum o Repository ser utilizado conjuntamente com um padrão chamado de Specification. 
+
+O que que o Specification faz? O Specification cria critérios para trazer os dados, então, ele pode colocar um critério assim: "Traga para mim, como critério, um registro onde o ID = 1". Então, esse é um critério de busca e eu posso injetar esse critério no Repository.
+
+E, então, é possível fazer as consultas com muito mais flexibilidade. Ou outro critério, onde o valor pode ser > que 100 ou o valor pode ser < 50; ou seja, criam-se critérios e esses critérios são passados (i.e., essas especificações) para o Repository e o Repository vai trazer os dados para a gente.
+
+Promove o padrão Specification; ou seja, é muito comum ver-se implementações de Repository recebendo implementações de Specification para realizar consultas.
 
