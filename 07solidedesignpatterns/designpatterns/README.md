@@ -14,9 +14,9 @@ Componentes de alto nível não devem depender de componentes de baixo nível, e
 
 ## OCP - Open/Closed Principle
 
-Fechado para modificação e aberto para extensão
+Fechado para modificação e aberto para extensão.
 
-Crie pontos de extensão, evitando mexer no que já está funcionando e evitando fragilizar o código (Padrões Strategy, Decorator)
+Crie pontos de extensão, evitando mexer no que já está funcionando e evitando fragilizar o código (Padrões Strategy, Decorator).
 
 ## LSP - Liskov Substituion Principle
 
