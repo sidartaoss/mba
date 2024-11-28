@@ -400,7 +400,7 @@ Qual a diferença disso com Data Mapper?
 
 Data Mapper apenas faz o mapeamento entre uma entidade de mapeamento com o banco de dados - isso é totalmente independente do seu domínio da aplicação.
 
-Já o repository é diferente - ele vai ter os seus objetos de domínio, as entidades de domínio, os agregados, os value objects, então, na camada de domínio, vai ser criado uma interface (abstração).
+Já o Repository é diferente - ele vai ter os seus objetos de domínio, as entidades de domínio, os agregados, os value objects, então, na camada de domínio, vai ser criado uma interface (abstração).
 
 Nessa interface, quando for necessário recuperar todos os registros, define-se um findAll; quando for necessário recuperar um registro por id, define-se um findById; quando eu precisar inserir, define-se um método de insert.
 
