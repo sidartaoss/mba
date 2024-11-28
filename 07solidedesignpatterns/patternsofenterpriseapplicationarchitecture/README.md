@@ -422,5 +422,4 @@ O que que o Specification faz? O Specification cria critérios para trazer os da
 
 E, então, é possível fazer as consultas com muito mais flexibilidade. Ou outro critério, onde o valor pode ser > que 100 ou o valor pode ser < 50; ou seja, criam-se critérios e esses critérios são passados (i.e., essas especificações) para o Repository e o Repository vai trazer os dados para a gente.
 
-Promove o padrão Specification; ou seja, é muito comum ver-se implementações de Repository recebendo implementações de Specification para realizar consultas.
 
