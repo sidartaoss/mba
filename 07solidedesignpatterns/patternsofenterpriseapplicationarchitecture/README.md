@@ -390,7 +390,9 @@ Então, é sempre recomendável colocar um log para ver quais são as queries qu
 
 ## Repository
 
+``
 Mediação entre a camada de domínio e a camada de dados, usando uma interface para acessar os objetos de domínio.
+``
 
 Toda vez que for necessário que o domínio recupere dados, será utilizado uma interface. Essa interface é a interface que a sua abstração de dados vai implementar para receber os dados de domínio.
 
