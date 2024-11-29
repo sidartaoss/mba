@@ -106,3 +106,6 @@ This is where a user submits commands, imperatives do this, and once those comma
 - Saga
     - Choreography
     - Orchestration
+
+### Referência
+MBA ARQUITETURA FULL CYCLE. DDD (Domain Driven Design). 2024. Disponível em: https://plataforma.fullcycle.com.br/. Acesso em: 29 nov. 2024.

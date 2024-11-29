@@ -100,3 +100,6 @@ I don't create interfaces unless I need them.
 Now, when do I need them?
 
 Well, I need them when if I have a change requested by the customer that I need to isolate myself from; then I'm going to create an interface.
+
+### Referência
+MBA ARQUITETURA FULL CYCLE. SOLID e Design Patterns. 2024. Disponível em: https://plataforma.fullcycle.com.br/. Acesso em: 29 nov. 2024.

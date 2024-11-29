@@ -281,5 +281,5 @@ Aplicações em ecossistemas com 1.000, 2.000, 10.000, 15.000 desenvolvedores, o
 
 - Não é necessário saber tudo de uma vez, mas é importante saber para começar a estruturar o ambiente.
 
-
-
+### Referência
+MBA ARQUITETURA FULL CYCLE. Microsserviços e arquitetura baseada a eventos. 2024. Disponível em: https://plataforma.fullcycle.com.br/. Acesso em: 29 nov. 2024.

@@ -423,3 +423,5 @@ O que que o Specification faz? O Specification cria critérios para trazer os da
 E, então, é possível fazer as consultas com muito mais flexibilidade. Ou outro critério, onde o valor pode ser > que 100 ou o valor pode ser < 50; ou seja, criam-se critérios e esses critérios são passados (i.e., essas especificações) para o Repository e o Repository vai trazer os dados para a gente.
 
 
+### Referência
+MBA ARQUITETURA FULL CYCLE. SOLID e Design Patterns. 2024. Disponível em: https://plataforma.fullcycle.com.br/. Acesso em: 29 nov. 2024.

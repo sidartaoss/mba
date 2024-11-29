@@ -47,3 +47,6 @@ Criar comportamento intercambiável.
 ## Dynamic Factory
 
 Criar uma instância com base em uma string.
+
+### Referência
+MBA ARQUITETURA FULL CYCLE. SOLID e Design Patterns. 2024. Disponível em: https://plataforma.fullcycle.com.br/. Acesso em: 29 nov. 2024.

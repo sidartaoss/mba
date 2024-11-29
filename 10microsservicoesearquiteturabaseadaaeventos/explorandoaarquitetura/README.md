@@ -33,3 +33,6 @@
     - Regra: o software deve estar pronto para ser criado e recriado sem nenhuma perda de dados;
         
         - Se o comportamento da aplicação mudar pelo fato de você destruir a aplicação e subir de novo, significa que você está armazenando estado.
+
+### Referência
+MBA ARQUITETURA FULL CYCLE. Microsserviços e arquitetura baseada a eventos. 2024. Disponível em: https://plataforma.fullcycle.com.br/. Acesso em: 29 nov. 2024.
