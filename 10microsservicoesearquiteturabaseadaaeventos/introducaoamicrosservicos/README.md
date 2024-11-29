@@ -68,7 +68,9 @@
 
 ## O que são microsserviços?
 
+``
 Aplicações comuns com propósitos e escopo bem definidos.
+``
 
 - Microsserviço é um sistema como outro qualquer. Quando se cria um monolito e quando se cria um microsserviço, basicamente, está-se criando a mesma coisa; a diferença é o tamanho, o nível de responsabilidade do sistema. Enquanto os monolitos têm diversos escopos, diversas responsabilidades, diversos motivos para mudar, os microsserviços, normalmente, têm apenas um motivo para mudança.
 
