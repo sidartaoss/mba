@@ -128,6 +128,45 @@ Vantagens:
 
     - É necessário preparar o time para não fazer essas chamadas diretas entre microsserviços. Deve haver uma Network Policy proibindo chamadas diretas entre microsserviços de contextos diferentes.
 
+## Enterprise Gateways
+
+- Têm mais recursos e mais facilidades;
+
+- Gerenciamento de APIs externas/internas;
+
+- A exposição fica na borda dos microsserviços;
+
+- De forma automática, através de um portal do desenvolvedor ou um portal de gerenciamento de API Gateway, consegue fazer o gerenciamento das rotas;
+
+- Sistemas de administração de APIs;
+
+- Suporte a vários ambientes (dev, prod);
+
+    - Consegue trabalhar de uma forma mais multi-tenant;
+
+- Recursos específicos do vendor (lock-in):
+
+    - Recursos de conversão de dados;
+
+    - Recursos para fazer acesso a dados diretamente;
+
+    - Recursos para injetar dados no cabeçalho;
+
+    - Dentro de uma única chamada REST, API Gateway pode fazer múltiplas chamadas ao mesmo tempo: obter os dados, combinar em um único formato e retornar;
+
+- Possui dependência externa:
+
+    - Precisa controlar estado; para isso, utilizam banco de dados;
+
+    - Nesse caso, você vai brigar ou pela consistência ou pela disponibilidade dos dados no API Gateway;
+
+    - Exemplos:
+
+        - API Gateway da Sensedia;
+
+        - API Gateways dos Cloud Providers.
+
+
 
 
 
