@@ -50,6 +50,85 @@ Isso acaba gerando muitos efeitos colaterais:
 
 - Cada microsserviço tem o seu próprio banco de dados. Então, é possível explorar outras opções como, por exemplo, um key-value store ou outro banco de dados não-relacional;
 
+## Aumento de complexidade
+
+![Aumento de complexidade](/10microsservicoesearquiteturabaseadaaeventos/imagens/aumento_de_complexidade.png)
+
+- Escala horizontal;
+
+- Todos os microsserviços vão ter um Load Balancer;
+
+    - Antes, para um monolito, era necessário apenas um Load Balancer. Agora, para 10 micorsserviços, são necessários 10 Load Balancers, pele menos.
+
+- Múltiplos processos de CI/CD;
+
+- Múltiplas verificação de segurança;
+
+- Mais provisionamento de infraestrutura;
+
+- Mais custo;
+
+- Governança mais complexa;
+
+- Mais risco / efeito dominó:
+
+    - Se um microsserviço cai, toda a rede pode ficar mais lenta, porque as aplicações dependentes vão ficar presas no microsserviço que está caindo ou está lento, gerando, então, um efeito dominó (requisições síncronas (dupla Latência)); 
+    
+    - Por isso, não é recomendado trabalhar com requisições síncronas;
+
+- Mais latência;
+
+- Observabilidade mais complexa;
+
+- Troubleshooting;
+
+    - Se não consegue encontrar a origem do erro via tracing, o troubleshooting fica mais complicado.
+
+## Coreografia versus Death Star
+
+A comunicação síncrona entre microsserviços pode gerar a coreografia de microsserviços, onde há a livre comunicação entre as aplicações: o A chama o B, que chama o C, etc., e começa a ter um relacionamento e uma forte dependência entre os microsserviços.
+
+Quando você vai olhar na rede para entender como está a chamada de um microsserviço para o outro, a coisa parece muito caótica, gerando um problema de gestão de rede e de custos de infraestrutura.
+
+Quando temos esse cenário, a gente começa a viver alguns efeitos colaterais, sendo um deles a chamada Estrela da Morte (Death Star). Significa que, quando você vai olhar o gráfico das chamadas de rede, você vai perceber que você tem um ambiente caótico e, aí, você começa a perceber o caos que a sua rede pode se tornar.
+
+## Topologia de microsserviços
+
+O que você pode fazer para melhorar esse cenário, melhorar a gestão dos microsserviços, evitando uma death star, por exemplo, é começar a trabalhar com topologia de microsserviços.
+
+![Topologia de microsserviços](/10microsservicoesearquiteturabaseadaaeventos/imagens/topologia_de_microsservicos.png)
+
+Dica de ouro:
+
+``
+Separar/Delimitar um conjunto de microsserviços (exemplo, Cobrança), correspondente a um subdomínio de negócio, por API Gateways.
+``
+
+A API Gateway vai agrupar os microsserviços por contexto de negócio. 
+
+Todas às vezes que um microsserviço precisar chamar um outro microsserviço de um outro contexto, não vai mais existir a chamada direta. 
+
+Ao invés de um microsserviço chamar outro microsserviço diretamente, a chamada é feita pela API Gateway para outra API Gateway, que corresponde a outro subdomínio de negócio (exemplo, Logística).
+
+Vantagens:
+
+- Times não precisam saber com qual microsserviço eles vão se comunicar;
+
+    - Eles vão chamar uma API Gateway em determinado endereço e vão ter esse resultado (response);
+
+- Equipes em outros contextos poderão mudar, refazer, reconstruir, trocar a linguagem de programação, mantendo o mesmo endpoint; TRANSPARENTE para quem utiliza o microsserviço;
+
+- Ao utilizar API Gateway, pode-se fazer uso de políticas de retry, segurança, rate limit, de forma pré-configurada no API Gateway e o microsserviço não vai precisar se preocupar com essas configurações;
+
+- Deve-se deixar as API Gateways de forma stateless, com arquivo declarativo e sem banco de dados.
+
+    - Dessa forma, é possível matar e subir a API Gateway novamente a qualquer momento que se desejar. Quando criar um novo contexto, basta subir uma nova API Gateway dentro desse contexto;
+
+    - Exemplo: Kong, KrakenD;
+
+    - É necessário preparar o time para não fazer essas chamadas diretas entre microsserviços. Deve haver uma Network Policy proibindo chamadas diretas entre microsserviços de contextos diferentes.
+
+
 
 
 ### Referência
