@@ -12,11 +12,11 @@
 
     - Tem tudo aquilo que faz com que o sistema funcione:
 
-        - Normalmente, tem um banco de dados ou mais bancos de dados;
+        - Normalmente, tem um ou mais bancos de dados;
 
         - Normalmente, também tem um sistema de cache;
 
-        - E, conforme a demanda de acesso for crescendo, é necessário colocar um Load Balancer (ou API Gateway) na frente e o sistema passa, então, a crescer horizontalmente.
+        - E, conforme a demanda de acesso for crescendo, tende a ser necessário colocar um Load Balancer (ou API Gateway) na frente e o sistema passa, então, a crescer horizontalmente.
   
 - No caso em que for necessário utilizar um Load Balancer (ou API Gateway):
 
