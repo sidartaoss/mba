@@ -16,9 +16,9 @@
 
         - Normalmente, também tem um sistema de cache;
 
-        - E, conforme a demanda de acesso for crescendo, é colocado um Load Balancer (ou API Gateway) na frente e o sistema passa a crescer horizontalmente.
+        - E, conforme a demanda de acesso for crescendo, é necessário colocar um Load Balancer (ou API Gateway) na frente e o sistema passa, então, a crescer horizontalmente.
   
-- No caso em que se utilizar um Load Balancer (ou API Gateway):
+- No caso em que for necessário utilizar um Load Balancer (ou API Gateway):
 
     - O disco deve ser efêmero;
 
