@@ -128,7 +128,9 @@ Vantagens:
 
     - É necessário preparar o time para não fazer essas chamadas diretas entre microsserviços. Deve haver uma Network Policy proibindo chamadas diretas entre microsserviços de contextos diferentes.
 
-## Enterprise Gateways
+## Enterprise gateways
+
+![Enterprise gateway](/10microsservicoesearquiteturabaseadaaeventos/imagens/enterprise_gateway.png)
 
 - Têm mais recursos e mais facilidades;
 
@@ -165,6 +167,52 @@ Vantagens:
         - API Gateway da Sensedia;
 
         - API Gateways dos Cloud Providers.
+
+## Micro gateways
+
+- Roteamento de tráfego;
+
+    - Atuando como um proxy reverso;
+
+- Não há sistemas de administração de APIs (painel de controle). Gestor do time de API's vai lá e cadastra diversas rotas;
+
+- API's são configuradas de forma declarativa, dentro de uma configuração, normalmente dispõe um arquivo para o Kubernetes subir e ler esse arquivo;
+
+- Equipe precisa, manualmente, configurar os endpoints e fazer o deploy para cada mudança;
+
+- Não possui dependência externa:
+
+    - Não armazenam estado;
+
+    - Pode derrubar e pode subir quantas vezes quiser;
+
+    - Não depende de banco de dados externo;
+
+    - Não tem problemas de disponibilidade e consistência, como em relação a enterprise gateways.
+
+- Não possui suporte a vários ambientes (dev, prod);
+
+    - Se for necessário suporte a diversos ambientes, será necessário criar diversas micro gateways;
+
+- Não possui vendor (lock-in), porque, na maioria das vezes, esses tipos de gateways são open source;
+
+- Roda standalone sem dependência externa:
+
+    - Não precisa de banco de dados;
+
+    - Não precisa de cache.
+
+- As enterprise gateways recebem as chamadas externas e apontam para as micro gateways;
+
+- As micro gateways podem ser utilizadas internamente para fazer a comunicação com outras micro gateways, atuando na frente de microsserviços que compreendem contextos (subdomínios) de negócio;
+
+- Nem a enterprise gateway sabe diretamente qual microsserviço que ela vai chamar, ela sabe qual é o escopo que ela vai chamar;
+
+    - Exemplo:
+        
+        - Enterprise gateway /charge => micro gateway /bill;
+
+## Autenticação e autorização
 
 
 
