@@ -210,7 +210,7 @@ Regra 1: não deve-se ficar escravo de somente um padrão.
 
 É necessário conhecer mais padrões, utilizar esses padrões quando convém; combinar a utilização desses padrões.
 
-Mas, ponto principal: deve-se deixar isso de forma cada vez mais expressiva no software, porque é comum de se ver muitos desenvolvedores conhecerem apenas um, aí, vê-se coisa misturada e fala-se que o software é uma bagunça; mas não é uma bagunça: apenas utilizou-se o padrão certo para a ocasião certa, foi feito essa combinação dentro do seu software.
+Mas, ponto principal: deve-se deixar isso de forma cada vez mais expressiva no software, porque é comum de se ver muitos desenvolvedores conhecerem apenas um. Aí, ao ver-se coisa misturada, fala-se que o software é uma bagunça. Mas não é uma bagunça: apenas utilizou-se o padrão certo para a ocasião certa, foi feito essa combinação dentro do seu software.
 
 ## Table Module (Domain Logic)
 
