@@ -34,5 +34,23 @@
         
         - Se o comportamento da aplicação mudar pelo fato de você destruir a aplicação e subir de novo, significa que você está armazenando estado.
 
+## Arquitetura baseada em microsserviços
+
+Agora, cada componente que estava no monolito pode virar um serviço, pode virar uma aplicação.
+
+![Arquitetura baseada em microsserviços](/10microsservicoesearquiteturabaseadaaeventos/imagens/arquitetura_baseada_em_microsservicos.png)
+
+Isso acaba gerando muitos efeitos colaterais:
+
+- Os microsserviços vão se comunicar;
+
+- Uma arquitetura de microsserviços pode ser mais lenta, se fizer uso de comunicação síncrona, em que cada chamada a uma aplicação que chama outra aplicação que chama outra aplicação, etc., pode ir adicionando cada vez mais latência no processamento do request (dupla latência).
+
+- Tem que haver estratégias para evitar essa chamada dominó. É necessário saber, também, quando disponibilizar o dado em tempo real: quanto maior é o sistema, raramente vai ser necessário entregar o dado quente ou o dado na hora;
+
+- Cada microsserviço tem o seu próprio banco de dados. Então, é possível explorar outras opções como, por exemplo, um key-value store ou um banco de dados não-relacional;
+
+
+
 ### Referência
 MBA ARQUITETURA FULL CYCLE. Microsserviços e arquitetura baseada a eventos. 2024. Disponível em: https://plataforma.fullcycle.com.br/. Acesso em: 29 nov. 2024.
