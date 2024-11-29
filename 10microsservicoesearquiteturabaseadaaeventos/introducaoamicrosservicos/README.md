@@ -66,3 +66,28 @@
             
             - Se tudo estiver ok, a infraestrutura antiga é apagada. Se não estiver ok, simplesmente roteia novamente para a infraestrutura antiga.
 
+## O que são microsserviços?
+
+Aplicações comuns com propósitos e escopo bem definidos.
+
+- Microsserviço é um sistema como outro qualquer. Quando se cria um monolito e quando se cria um microsserviço, basicamente, está-se criando a mesma coisa; a diferença é o tamanho, o nível de responsabilidade do sistema. Enquanto os monolitos têm diversos escopos, diversas responsabilidades, diversos motivos para mudar, os microsserviços, normalmente, têm apenas um motivo para mudança.
+
+- Independentes e autônomos:
+
+    - Criar mecanismos de fallback: caso o microsserviço que você dependa diretamente estiver fora do ar, você vai degradar a entrega que você vai dar para o usuário final.
+
+    - Exemplo: Mostrar saldo do usuário. No momento em que vai mostrar o saldo do usuário, o microsserviço que gera toda a conta para trazer o saldo está fora do ar. Para não entregar uma experiência ruim para o usuário, como um erro 500, você pode recuperar o saldo que foi entregue pela última vez e mostrar para o usuário: pelo menos, conseguiu-se gerar valor para o usuário final. Chama-se `gracefull degradation`. Para informações críticas, é necessário ter essa estratégia para não estourar um erro na cara do cliente.
+
+- Participam de um ecossistema maior. Uma parte da engrenagem.
+
+
+## Arquitetura baseada em microsserviços
+
+- Possibilidade de múltiplas tecnologias;
+
+    - Considerando política de governança.
+
+- Processo de deploy menos arriscado;
+
+    - 
+
