@@ -260,6 +260,24 @@ Então, toda vez que o usuário enviar uma requisição para qualquer microsserv
 
 Sendo real, a api gateway já encaminha a requisição para os microsserviços dentro da aplicação.
 
+## Efeitos colaterais
+
+No caso em que, no momento em que o servidor de identidade gerar o token, ele tiver que gerar, também, uma expiração, ou seja, por quanto tempo esse token for válido.
+
+Digamos que o tempo seja uma hora e, depois de um minuto, desejar-se invalidar a autenticação do usuário.
+
+Como a api gateway não está a todo momento batendo no servidor de autenticação, durante essa uma hora que o usuário enviar o token para a api gateway, ela vai validar esse token como sendo válido.
+
+Então, se for necessário cancelar o login do usuário, durante o tempo de expiração, o usuário ainda vai poder acessar o sistema.
+
+Nesse momento, é necessário ter estratégias de verificação para saber quanto tempo vai ser necessário utilizar de expiração para cada token.
+
+Caso o tempo de expiração seja alterado para 5 minutos, por exemplo, garante-se que, por 5 minutos, o usuário vai sempre acessar, mesmo que o seu login seja cancelado. Passando 5 minutos, esse login é invalidado e, então, o usuário vai ter que utilizar um refresh token. Assim, uma nova solicitação vai bater no servidor de autenticação para obter um novo token para validar por mais 5 minutos.
+
+Então, quanto maior for o tempo de expiração do token, maior vai ser o tempo em que se perde o controle sobre o acesso e o usuário vai poder acessar a aplicação. Porém, quanto maior for esse tempo, menor vai ser a carga no servidor de autenticação.
+
+Quanto menor o tempo, consegue-se ter um controle maior, porque o token vai expirar mais rapidamente, porém, a carga no servidor de autenticação vai ser maior.
+
 
 
 ### Referência
