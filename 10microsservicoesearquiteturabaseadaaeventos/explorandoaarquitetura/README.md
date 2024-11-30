@@ -252,9 +252,9 @@ Os microsserviços não estão verificando a autenticação em nenhum momento, p
 
 Essa abordagem tem um problema grave: a cada requisição que o usuário faz, toda requisição vai bater no servidor de autenticação. Isso torna o servidor de autenticação um ponto único de falha, porque ele vai estar sempre sobrecarregado.
 
-O servidor de autenticação consegue emitir novos tokens, porque ele tem uma chave privada. Mas, para verificar se o token é válido, basta ele prover para nós uma chave pública. Com essa chave pública, a gente consegue verificar se o token do usuário foi realmente emitido pelo nosso servidor de autenticação.
+O servidor de autenticação consegue emitir novos tokens, porque ele tem uma chave privada. Mas, para verificar se o token é válido, basta ele nos prover uma chave pública. Com essa chave pública, conseguimos verificar se o token do usuário foi realmente emitido pelo nosso servidor de autenticação.
 
-Nesse caso, podemos deixar essa chave pública disponível no api gateway. 
+Nesse caso, podemos deixar essa chave pública disponível na api gateway. 
 
 Então, toda vez que o usuário enviar uma requisição para qualquer microsserviço, ele vai enviar o token jwt e a api gateway apenas vai verificar se o token é válido, se foi realmente emitido pelo servidor de autenticação, porque, agora, ela tem uma chave pública, que permite validar se o token é real ou não. 
 
