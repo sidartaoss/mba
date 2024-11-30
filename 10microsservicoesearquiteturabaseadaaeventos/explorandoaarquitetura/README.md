@@ -230,11 +230,11 @@ Dependendo da situação, o seu microsserviço já vai receber a requisição j�
 
 5. (O id token, em cima do openid connect, vai prover, inclusive, as informações sobre o usuário; não necessariamente sobre o que ele pode acessar.);
 
-6. Esse token (access token) vai ser a chave que o usuário vai utilizar para fazer a próxima requisição.
+6. Esse token (access token) vai ser a chave que o usuário vai utilizar para fazer a próxima requisição;
 
 7. É muito comum esse token ser no formato jwt (json web token); além de carregar informações do usuário, também pode carregar as roles;
 
-8. Nas próximas requisições que o usuário fizer, ele vai passar o jwt;
+8. Nas próximas requisições que o usuário fizer, ele vai passar o jwt.
 
 Situação #1:
 
