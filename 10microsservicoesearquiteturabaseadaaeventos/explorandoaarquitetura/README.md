@@ -214,7 +214,9 @@ Vantagens:
 
 ## Autenticação e autorização
 
-Quando se trabalha com microsserviços, não necessariamente você vai precisar fazer a autenticação de cada microsserviço. Dependendo da situação, o seu microsserviço já vai receber a requisição já autenticada.
+Quando se trabalha com microsserviços, não necessariamente você vai precisar fazer a autenticação de cada microsserviço. 
+
+Dependendo da situação, o seu microsserviço já vai receber a requisição já autenticada.
 
 ![Autorização. Situação 1.](/10microsservicoesearquiteturabaseadaaeventos/imagens/autorizacao_situacao_1.png)
 
