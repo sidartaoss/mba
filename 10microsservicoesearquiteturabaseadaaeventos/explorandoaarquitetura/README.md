@@ -130,8 +130,6 @@ Vantagens:
 
 ## Enterprise gateways
 
-![Enterprise gateway](/10microsservicoesearquiteturabaseadaaeventos/imagens/enterprise_gateway.png)
-
 - Têm mais recursos e mais facilidades;
 
 - Gerenciamento de APIs externas/internas;
@@ -169,6 +167,8 @@ Vantagens:
         - API Gateways dos Cloud Providers.
 
 ## Micro gateways
+
+![Enterprise gateway](/10microsservicoesearquiteturabaseadaaeventos/imagens/enterprise_gateway.png)
 
 - Roteamento de tráfego;
 
@@ -214,7 +214,49 @@ Vantagens:
 
 ## Autenticação e autorização
 
+Quando se trabalha com microsserviços, não necessariamente você vai precisar fazer a autenticação de cada microsserviço. Dependendo da situação, o seu microsserviço já vai receber a requisição já autenticada.
 
+![Autorização. Situação 1.](/10microsservicoesearquiteturabaseadaaeventos/imagens/autorizacao_situacao_1.png)
+
+1. Usuário vai enviar a sua requisição para um enterprise gateway;
+
+2. Essa requisição de autenticação vai acessar diretamente um servidor de autenticação (servidor de identidade);
+
+3. O servidor de identidade vai verificar se as credenciais estão corretas;
+
+4. Caso estejam corretas, o servidor de identidade vai retornar para o enterprise gateway retornar para o usuário um token (access token) e também um id token;
+
+5. (O id token, em cima do openid connect, vai prover, inclusive, as informações sobre o usuário; não necessariamente sobre o que ele pode acessar.);
+
+6. Esse token (access token) vai ser a chave que o usuário vai utilizar para fazer a próxima requisição.
+
+7. É muito comum esse token ser no formato jwt (json web token); além de carregar informações do usuário, também pode carregar as roles;
+
+8. Nas próximas requisições que o usuário fizer, ele vai passar o jwt;
+
+Situação #1:
+
+- Usuário envia a requisição passando o token (jwt);
+
+- Vai bater na api gateway;
+
+- A api gateway envia a requisição para o servidor de identidade;
+
+- O servidor de identidade verifica se o token é válido;
+
+- Se for válido, o processo de acesso continua e o microsserviço é acessado diretamente.
+
+Os microsserviços não estão verificando a autenticação em nenhum momento, porque a autenticação já passou pelo api gateway.
+
+Essa abordagem tem um problema grave: a cada requisição que o usuário faz, toda requisição vai bater no servidor de autenticação. Isso torna o servidor de autenticação um ponto único de falha, porque ele vai estar sempre sobrecarregado.
+
+O servidor de autenticação consegue emitir novos tokens, porque ele tem uma chave privada. Mas, para verificar se o token é válido, basta ele prover para nós uma chave pública. Com essa chave pública, a gente consegue verificar se o token do usuário foi realmente emitido pelo nosso servidor de autenticação.
+
+Nesse caso, podemos deixar essa chave pública disponível no api gateway. 
+
+Então, toda vez que o usuário enviar uma requisição para qualquer microsserviço, ele vai enviar o token jwt e a api gateway apenas vai verificar se o token é válido, se foi realmente emitido pelo servidor de autenticação, porque, agora, ela tem uma chave pública, que permite validar se o token é real ou não. 
+
+Sendo real, a api gateway já encaminha a requisição para os microsserviços dentro da aplicação.
 
 
 
