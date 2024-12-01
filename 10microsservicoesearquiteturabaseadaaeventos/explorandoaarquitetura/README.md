@@ -313,7 +313,7 @@ Sendo assim, é necessário decidir:
         - Assim, será possível ter acesso aos microsserviços somente se a requisição bater na api gateway. A api gateway deve ter acesso a Internet, ou seja, o usuário final vai bater na api gateway.
 
 ![Autorização. Situação 2.](/10microsservicoesearquiteturabaseadaaeventos/imagens/autorizacao_situacao_2.png)
-:Fonte: Full Cycle, 2024.
+<center>Fonte: Full Cycle, 2024.</center>
 
 Qual é o problema de colocar as chaves públicas nos microsserviços?
 
