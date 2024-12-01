@@ -197,5 +197,5 @@ Quando não é possível trabalhar com schema registry:
 
 - Informar ao time que esse é o contrato a ser seguido.
 
-
-
+### Referência
+MBA ARQUITETURA FULL CYCLE. Microsserviços e arquitetura baseada a eventos. 2024. Disponível em: https://plataforma.fullcycle.com.br/. Acesso em: 29 nov. 2024.
