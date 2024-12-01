@@ -7,3 +7,5 @@
 [Comunicação assíncrona](/10microsservicoesearquiteturabaseadaaeventos/comunicacaoassincrona/README.md)
 
 [EDA](/10microsservicoesearquiteturabaseadaaeventos/eda/README.md)
+
+[CQRS](/10microsservicoesearquiteturabaseadaaeventos/cqrs/README.md)
