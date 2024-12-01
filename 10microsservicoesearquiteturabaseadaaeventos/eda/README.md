@@ -115,7 +115,7 @@ Conforme o tempo passa, os sistemas mudam, os dados mudam e o schema de publica�
 
 Imaginando que temos 10 microsserviços lendo um microsserviço que está enviando uma mensagem. Se esse microsserviço começa a mandar a mensagem em um formato diferente:
 
-    - Os 10 microsserviços, ao ler a mensagem, vão começar a quebrar.
+- Os 10 microsserviços, ao ler a mensagem, vão começar a quebrar.
 
 Então, é necessário uma maneira de reforçar o padrão de envio e recebimento das mensagens desses eventos.
 
