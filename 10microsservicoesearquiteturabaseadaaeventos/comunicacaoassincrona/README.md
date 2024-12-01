@@ -105,3 +105,5 @@ O que a exchange faz?
 
 - Em abordagens como o Apache Kafka, quando a mensagem é lida do tópico, essa mensagem ainda fica guardada nesse tópico e, caso se queira ler novamente a mensagem do tópico, é possível ler. E é possível escolher, também, por quanto tempo a mensagem deve ficar armazenada no tópico.
 
+### Referência
+MBA ARQUITETURA FULL CYCLE. Microsserviços e arquitetura baseada a eventos. 2024. Disponível em: https://plataforma.fullcycle.com.br/. Acesso em: 29 nov. 2024.
