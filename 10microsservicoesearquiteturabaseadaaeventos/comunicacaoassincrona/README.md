@@ -63,7 +63,7 @@ Temos duas abordagens principais para se trabalhar com tecnologias diferentes pa
 
 ### Tópicos
 
-Uma forma é utilizando mecanismos que trabaham com o padrão Pub/Sub (Publisher/Subscriber).
+Uma forma é utilizando mecanismos que trabaham com o padrão pub/sub (publisher/subscriber).
 
 ![Pub/Sub](/10microsservicoesearquiteturabaseadaaeventos/imagens/pub_sub.png)
 <p align="left">Fonte: Full Cycle, 2024.</p>
