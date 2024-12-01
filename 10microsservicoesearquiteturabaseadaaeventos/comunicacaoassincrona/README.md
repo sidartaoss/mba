@@ -70,7 +70,7 @@ Uma forma é utilizando mecanismos que trabaham com o padrão pub/sub (publisher
 
 - Um sistema produz a mensagem (publisher);
 
-- Essa mensagem vai ficar guardada em um tópico (local aonde essas mensagens serão enviadas). Normalmente, chamamos de tópico, dependendo do sistema, podemos chamar de fila também;
+- Essa mensagem vai ficar guardada em um tópico, que é o local aonde essas mensagens serão enviadas. (Normalmente, chamamos de tópico, dependendo do sistema, podemos chamar de fila também);
 
 - Temos sistemas (subscriber) pendurados nesse tópico, aguardando as mensagens chegarem. Conforme as mensagens forem chegando, os sistemas vão lendo as mensagens.
 
