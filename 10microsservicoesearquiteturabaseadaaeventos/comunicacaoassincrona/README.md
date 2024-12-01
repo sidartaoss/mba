@@ -101,7 +101,7 @@ O que a exchange faz?
 
 - Assim que os sistemas lêem uma mensagem, essas mensagens são apagadas (dropadas) da fila. Se precisar ler novamente a mensagem, não vai conseguir;
 
-    - Existe um outro tipo de fila do RabbitMQ que se assemalha ao tópico do Apache Kafka, que é o tipo stream. O stream de dados as mensagens guardadas na fila, caso seja necessário fazer a releitura dessas mensagens.
+    - Existe um outro tipo de fila do RabbitMQ que se assemalha ao tópico do Apache Kafka, que é o tipo stream. O stream de dados mantém as mensagens guardadas na fila, caso seja necessário fazer a releitura dessas mensagens.
 
 - Em abordagens como o Apache Kafka, quando a mensagem é lida do tópico, essa mensagem ainda fica guardada nesse tópico e, caso se queira ler novamente a mensagem do tópico, é possível ler. E é possível escolher, também, por quanto tempo a mensagem deve ficar armazenada no tópico.
 
