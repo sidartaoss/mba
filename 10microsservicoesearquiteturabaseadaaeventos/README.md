@@ -5,3 +5,5 @@
 [Explorando a arquitetura](/10microsservicoesearquiteturabaseadaaeventos/explorandoaarquitetura/README.md)
 
 [Comunicação assíncrona](/10microsservicoesearquiteturabaseadaaeventos/comunicacaoassincrona/README.md)
+
+[EDA](/10microsservicoesearquiteturabaseadaaeventos/eda/README.md)
