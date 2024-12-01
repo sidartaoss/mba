@@ -294,6 +294,9 @@ Nesse caso, a chave pública que estava na api gateway que foi gerada pelo servi
 
 Assim, toda vez que a gente receber uma requisição, essa requisição vai bater diretamente no microsserviço, o microsserviço vai validar o jwt usando essa chave, se estiver ok, ele processa a requisição, se não estiver ok, ele não processa a requisição, porque não está autorizado.
 
+![Autorização. Situação 2 A.](/10microsservicoesearquiteturabaseadaaeventos/imagens/autorizacao_situacao_2_A.png)
+<p align="left">Fonte: Full Cycle, 2024.</p>
+
 Qual é o problema com essa abordagem?
 
 - O microsserviço vai começar a receber requisições as quais o usuário não tem autenticação. Mas, mesmo assim, ele vai ter que tratar esse tráfego;
@@ -318,7 +321,7 @@ Sendo assim, é necessário decidir:
 
         - Assim, será possível ter acesso aos microsserviços somente se a requisição bater na api gateway. A api gateway deve ter acesso a Internet, ou seja, o usuário final vai bater na api gateway.
 
-![Autorização. Situação 2.](/10microsservicoesearquiteturabaseadaaeventos/imagens/autorizacao_situacao_2.png)
+![Autorização. Situação 2 B.](/10microsservicoesearquiteturabaseadaaeventos/imagens/autorizacao_situacao_2_B.png)
 <p align="left">Fonte: Full Cycle, 2024.</p>
 
 Qual é o problema de colocar as chaves públicas nos microsserviços?
