@@ -6,7 +6,7 @@ Informações que já aconteceram.
 
 Exemplos:
 
-    - Compra aprovada, pagamento efetuado, nota fiscal emitida...
+- Compra aprovada, pagamento efetuado, nota fiscal emitida...
 
 ## Tipos de eventos
 
