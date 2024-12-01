@@ -280,7 +280,7 @@ Quanto menor o tempo, consegue-se ter um controle maior, porque o token vai expi
 
 ## Microsserviços versus redes internas
 
-### Situação #2
+Situação #2:
 
 Às vezes, não temos uma api gateway ou, às vezes, mesmo tendo uma api gateway, não queremos fazer a validação desse token na api gateway; podemos fazer a autenticação no próprio microsserviço.
 
