@@ -3,6 +3,7 @@
 - Um monolito clássico que consegue escalar.
 
 ![Monolito clássico e escalável](/10microsservicoesearquiteturabaseadaaeventos/imagens/monolito_classico_e_escalavel.png)
+<p align="left">Fonte: Full Cycle, 2024.</p>
 
 - Toda vez que estamos falando de um monolito clássico, trata-se de um sistema e, dentro desse sistema, nós temos diversos componentes:
 
@@ -39,6 +40,7 @@
 Agora, cada componente que estava no monolito pode virar um serviço, pode virar uma aplicação.
 
 ![Arquitetura baseada em microsserviços](/10microsservicoesearquiteturabaseadaaeventos/imagens/arquitetura_baseada_em_microsservicos.png)
+<p align="left">Fonte: Full Cycle, 2024.</p>
 
 Isso acaba gerando muitos efeitos colaterais:
 
@@ -53,6 +55,7 @@ Isso acaba gerando muitos efeitos colaterais:
 ## Aumento de complexidade
 
 ![Aumento de complexidade](/10microsservicoesearquiteturabaseadaaeventos/imagens/aumento_de_complexidade.png)
+<p align="left">Fonte: Full Cycle, 2024.</p>
 
 - Escala horizontal;
 
@@ -97,6 +100,7 @@ Quando temos esse cenário, a gente começa a viver alguns efeitos colaterais, s
 O que você pode fazer para melhorar esse cenário, melhorar a gestão dos microsserviços, evitando uma death star, por exemplo, é começar a trabalhar com topologia de microsserviços.
 
 ![Topologia de microsserviços](/10microsservicoesearquiteturabaseadaaeventos/imagens/topologia_de_microsservicos.png)
+<p align="left">Fonte: Full Cycle, 2024.</p>
 
 Dica de ouro:
 
@@ -169,6 +173,7 @@ Vantagens:
 ## Micro gateways
 
 ![Enterprise gateway](/10microsservicoesearquiteturabaseadaaeventos/imagens/enterprise_gateway.png)
+<p align="left">Fonte: Full Cycle, 2024.</p>
 
 - Roteamento de tráfego;
 
@@ -219,6 +224,7 @@ Quando se trabalha com microsserviços, não necessariamente você vai precisar 
 Dependendo da situação, o seu microsserviço já vai receber a requisição já autenticada.
 
 ![Autorização. Situação 1.](/10microsservicoesearquiteturabaseadaaeventos/imagens/autorizacao_situacao_1.png)
+<p align="left">Fonte: Full Cycle, 2024.</p>
 
 1. Usuário vai enviar a sua requisição para um enterprise gateway;
 
