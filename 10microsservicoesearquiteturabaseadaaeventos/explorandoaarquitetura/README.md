@@ -332,7 +332,22 @@ Qual é o problema de colocar as chaves públicas nos microsserviços?
 
 - Dessa forma, recomenda-se que, quanto menos esforço for necessário para lidar com autenticação, melhor.
 
+## Autenticação e Autorização
+- Caso não haja uma API Gateway, os microsserviços precisarão da chave pública para verificar a autenticidade do token;
 
+- O Token normalmente possui um tempo de validade;
+
+- Quanto maior a validade, menos requests teremos no Auth Service (Servidor de Identidade);
+
+- Quanto maior a validade, maior será o tempo que um usuário que venhamos desativar terá acesso ao sistema;
+
+- Caso você precise invalidar um usuário imediatamente, seu microsserviço precisará acessar o Auth Service a cada request;
+
+- Você poderá também possuir um modelo híbrido, onde somente alguns microsserviços façam a validação diretamente no Auth Service a cada request:
+
+    - Nesse caso, temos microsserviços extremamente críticos, aonde, caso seja nvalidado o token, na próxima requisição, o usuário não poderá acessar;
+
+    - Caso contrário, se não for necessário o efeito desativar na hora o acesso, pode-se contar com o tempo de expiração do token.
 
 ### Referência
 MBA ARQUITETURA FULL CYCLE. Microsserviços e arquitetura baseada a eventos. 2024. Disponível em: https://plataforma.fullcycle.com.br/. Acesso em: 29 nov. 2024.
