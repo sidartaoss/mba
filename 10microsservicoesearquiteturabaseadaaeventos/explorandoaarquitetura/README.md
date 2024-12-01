@@ -278,6 +278,48 @@ Então, quanto maior for o tempo de expiração do token, maior vai ser o tempo 
 
 Quanto menor o tempo, consegue-se ter um controle maior, porque o token vai expirar mais rapidamente, porém, a carga no servidor de autenticação vai ser maior.
 
+## Microsserviços versus redes internas
+
+### Situação #2
+
+Às vezes, não temos uma api gateway ou, às vezes, mesmo tendo uma api gateway, não queremos fazer a validação desse token na api gateway; podemos fazer a autenticação no próprio microsserviço.
+
+Nesse caso, a chave pública que estava na api gateway que foi gerada pelo servidor de autenticação pode ficar disponível em cada microsserviço.
+
+Assim, toda vez que a gente receber uma requisição, essa requisição vai bater diretamente no microsserviço, o microsserviço vai validar o jwt usando essa chave, se estiver ok, ele processa a requisição, se não estiver ok, ele não processa a requisição, porque não está autorizado.
+
+Qual é o problema com essa abordagem?
+
+- O microsserviço vai começar a receber requisições as quais o usuário não tem autenticação. Mas, mesmo assim, ele vai ter que tratar esse tráfego;
+
+- Imaginando um monte de requisições não autorizadas, o que vai acontecer? O microsserviço vai ter que ficar negando essas requisições o tempo todo;
+
+- Isso não é bom, porque tende a degradar a performance da aplicação.
+
+Sendo assim, é necessário decidir:
+
+- Ou o microsserviço valida, realmente, todo jwt que chegar para verificar se é válido ou não;
+
+- Ou o microsserviço acredita, por padrão, que todo jwt que chegar vai ser válido, porque, em algum momento, ele passou pela validação da api gateway;
+
+    - A aplicação acredita em todos os dados que vão chegar dentro da sua rede interna, porque parte-se do princípio de que tudo que chegou é válido, por conta de que essa validação bateu na api gateway;
+
+    - Existe algum problema em acreditar? Absolutamente nenhum problema. Principalmente, se os microsserviços não estiverem expostos pela Internet.
+
+    - O que fazer para garantir que os microsserviços não estejam expostos pela Internet?
+
+        - No momento de configurar os microsserviços, pode-se jogá-los em uma rede fora da Internet (i.e., sem ingress direto, sem um Internet gateway para que se consiga acessar), ou seja, dentro de uma subnet sem acesso a Internet. Quem vai ter acesso a esses microsserviços é a api gateway, porque ela consegue falar nessa rede, ela faz parte de outra subnet pública, que consegue acessar a subnet dos microsserviços;
+
+        - Assim, será possível ter acesso aos microsserviços somente se a requisição bater na api gateway. A api gateway deve ter acesso a Internet, ou seja, o usuário final vai bater na api gateway.
+
+Qual é o problema de colocar as chaves públicas nos microsserviços?
+
+- Imaginando que tenhamos 200 microsserviços, então, será necessário copiar essa chave pública para esses 200 microsserviços;
+
+- Se, por algum motivo, for alterado essa chave pública, será necessário mudar essa chave pública nesses 200 microsserviços; será necessário fazer um redeploy dessas chaves públicas. 
+
+- Dessa forma, recomenda-se que, quanto menos esforço for necessário para lidar com autenticação, melhor.
+
 
 
 ### Referência
