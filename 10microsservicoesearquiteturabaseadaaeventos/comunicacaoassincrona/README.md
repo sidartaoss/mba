@@ -45,17 +45,17 @@ Vantagens:
 
         - A diferença, nesse caso é que, para atender esse número maior de solicitações, essas solicitações vão ter que ficar enfileiradas por alguns momentos para que sejam atendidas.
 
-Então, ao trabalhar com comunicação assíncrona, você consegue resolver muito mais solicitações do que você tem de hardware para resolver em tempo real.
+        - Similarmente, você consegue resolver muito mais solicitações do que você tem de hardware para resolver em tempo real de forma assíncrona.
 
-Imaginando um cenário onde temos 1 milhão de visitas no site para realizar um pagamento, seria inviável ter 1 milhão de máquinas para atender todos esse pagamentos ao mesmo tempo.
+        - Imaginando um cenário onde temos 1 milhão de visitas no site para realizar um pagamento, seria inviável ter 1 milhão de máquinas para atender todos esse pagamentos ao mesmo tempo.
 
-Então, o que fazer?
+        - Então, o que fazer?
 
-Enfileiramos essas requisições de pagamento e, conforme as máquinas que temos disponíveis vão processando, os próximos pagamentos vão sendo processados.
+        - Enfileiramos essas requisições de pagamento e, conforme as máquinas que temos disponíveis vão processando, os próximos pagamentos vão sendo processados.
 
-O cliente não vai ter o pagamento processado em tempo real, mas, daqui 1 minuto, ele sabe que será processado.
+        - O cliente não vai ter o pagamento processado em tempo real, mas, daqui 1 minuto, ele sabe que será processado.
 
-Isso vai gerar uma economia muito grande, porque, mesmo que não tenhamos uma quantidade muito grande de recursos, nós sabemos que, aos poucos, o processamento vai acontecendo.
+        - Isso vai gerar uma economia muito grande, porque, mesmo que não tenhamos uma quantidade muito grande de recursos, nós sabemos que o processamento vai acontecendo aos poucos.
 
 ## Tópicos versus exchange
 
