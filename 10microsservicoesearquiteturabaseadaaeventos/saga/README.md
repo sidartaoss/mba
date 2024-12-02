@@ -105,7 +105,7 @@ SagaStatus = Compensating
 Step = 3
 StepStatus = Compensated
 
-Step = 1
+Step = 2
 StepStatus = Compensating
 ```
 
