@@ -37,7 +37,7 @@ Para definirmos o conceito de CQRS, antes, é necessário definir o conceito de 
 
 CQS:
 
-- Quando, dentro de um sistema, você tem comandos e esses comandos que são executados, que, normalmente, gravam alguma coisa ou que executam alguma coisa, nunca vão responder com uma resposta, nunca vão consultar dados para retornar uma resposta. Os comandos somente executam.
+- Quando, dentro de um sistema, você tem comandos, esses comandos são executados, normalmente, gravam alguma coisa, mas não vão responder com uma resposta; nunca vão consultar dados para retornar uma resposta. Os comandos somente executam.
 
 Quando estamos falando de CQRS, damos um passo além, porque separamos o sistema completamente. Lembrando que, com CQS, estávamos de falando de método, ou seja, algo mais interno do sistema.
 
