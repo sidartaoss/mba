@@ -225,3 +225,54 @@ Vantagens e quando usar:
 ``
 https://github.com/devfullcycle/cqrs
 ``
+
+Neste caso, estamos trabalhando com eventos dual write de mecanismos de sincronização, o que significa que estamos escrevendo em dois bancos de dados diferentes, simultaneamente, dentro da própria aplicação, sem utilizar um mecanismo de sincronização externo.
+
+![Parte interna da aplicação](/10microsservicoesearquiteturabaseadaaeventos/imagens/parte_interna_aplicacao.png)
+<p align="left">Fonte: Full Cycle, 2024.</p>
+
+Se formos ver a parte interna da aplicação, nós temos duas partes, duas camadas básicas: uma camada de comando, que são intenções do usuário e uma camada de consulta.
+
+### Camada de comando (onde os dados são gravados)
+
+Na camada de comando, temos:
+
+- Uma área de domínio, onde nós temos regras de negócio, com pedidos, produtos, itens do produto, podemos adicionar itens ao pedido, obter o total, multiplicando a quantidade de itens de cada pedido.
+
+- O repositório, onde gravamos os dados em um banco de dados de escrita.
+
+- Um comando, com um método handle, que cria um novo produto e salva esse produto no banco de dados de escrita.
+    
+    - Esse método handle não retorna nada.
+
+    - Com relação ao dual write, quando é gerado a transação, é disparado um evento para que seja utilizado para gravação dos dados no banco de dados de leitura. Uma vez que o evento é preparado, ele é disparado para o sistema.
+
+![Método handle](/10microsservicoesearquiteturabaseadaaeventos/imagens/metodo_handle.png)
+<p align="left">Fonte: Full Cycle, 2024.</p>
+
+    - Após disparar o evento, temos handler's que vão cuidar da operação quando o evento for disparado.
+
+    - No caso do handler de produto criado, o handler grava no mongodb como banco de dados de leitura; o comando grava em um banco relacional como banco de dados de escrita e o handler grava em um banco orientado a documentos como banco de dados de leitura.
+
+- Criou um comando;
+
+- Esse comando gravou no banco de dados de escrita e gerou um evento, o qual pode gravar também em um banco de dados de leitura;
+
+- Neste momento, nós temos dois bancos de dados de diferentes tipos, de formas diferentes de leitura os quais nós vamos conseguir trabalhar.
+
+
+### Camada de leitura
+
+Saindo da parte de comando, nós chegamos na parte de consulta (query).
+
+A parte de query serve apenas para consulta: não vai ter nenhuma gravação de dados e não vai ter regra de domínio.
+
+``
+A grande quebra de paradigma é conseguir executar as transações sem retornar nada e ler essas transações sem depender de gravação também.
+``
+
+Na parte de consulta, só vai consultar: consultas específicas, com mais performance, com mais velocidade e com um banco de dados organizado especificamente para os formatos de consulta que você deseja.
+
+Quando usar:
+
+- Isso vai ajudar muito em relação a microsserviços, comunicação entre sistemas, quando os sistemas trabalham com comunicação assíncrona.
