@@ -39,7 +39,7 @@ CQS:
 
 - Quando, dentro de um sistema, você tem comandos, esses comandos são executados, normalmente, gravam alguma coisa, mas não vão responder com uma resposta; nunca vão consultar dados para retornar uma resposta. Os comandos somente executam.
 
-Quando estamos falando de CQRS, damos um passo além, porque separamos o sistema completamente. Lembrando que, com CQS, estávamos de falando de método, ou seja, algo mais interno do sistema.
+Quando estamos falando de CQRS, damos um passo além, porque separamos o sistema completamente. Lembrando que, com CQS, estávamos de falando de métodos, ou seja, algo mais interno do sistema.
 
 ### Comandos
 
