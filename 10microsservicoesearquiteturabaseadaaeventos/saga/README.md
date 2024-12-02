@@ -111,6 +111,15 @@ StepStatus = Compensating
 
 - A seguir, o step 2 recebe a informação, vai executar a transação de compensação. A informação vai voltar e o status da saga deve ser alterado novamente. O status da saga ainda está compensando e o step 2 já foi compensado. O último step é o 1 e deve estar compensando.
 
+```
+SagaStatus = Compensating
+Step = 2
+StepStatus = Compensated
+
+Step = 1
+StepStatus = Compensating
+```
+
 - Então, a informação é enviada para o step 1. O microsserviço 1 executa a informação de compensação, retorna a informação para o step 1 e, agora, o status da saga muda para compensatedandcompleted, o que quer dizer que a saga, realmente, terminou. Mas terminou de forma compensada. Ou seja, não aconteceu o que era esperado, porque, caso contrário, o status da saga estaria como completed apenas:
 
 ```
