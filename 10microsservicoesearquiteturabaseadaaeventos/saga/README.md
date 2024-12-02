@@ -131,6 +131,112 @@ Step = 1
 StepStatus = Compensated
 ```
 
+## Compensação e gerenciamento de erros
+
+- Saga utilizando um orquestrador:
+
+    - O orquestrador vai ser um serviço separado, também chamado de mediador.
+
+    - O orquestrador faz uso de eventos e esses eventos acabam enviando informações para tópicos.
+
+    - Não necessariamente, para que uma saga funcione dessa forma, devem ser utilizadas filas. Poderia-se utilizar REST também. Qual é o tradeoff de trabalhar com REST, neste caso?
+
+    - Desvantagem:
+
+        - No momento de enviar a informação para um microsserviço x, o microsserviço x está fora do ar. Então a saga vai ter que trabalhar com retentativas (retries). Serão necessários mecanismos de retry, exponential backoff, ou seja, ele envia, aguarda 1 segundo, envia novamente, aguarda 2 segundos, envia de novo, aguarda 3 segundos..., etc.
+
+        - Quer dizer que é mais uma complexidade a ser adicionada em relação a políticas de retry.
+
+    - Quando se está trabalhando com filas, esse tipo de problema não vai existir, porque a resiliência é garantida através das filas.
+
+    - Por outro lado, temos um cenário onde, ao tentar compensar, ocorre um erro na compensação.
+
+    - O que fazer, nesse caso, quando acontece um erro na compensação?
+
+        - Nesse caso, pode ser criado um novo tópico. Esse tópico é um tópico apenas de erros. E, caso um erro aconteça, a informação é enviada para esse tópico de erro e pode haver:
+        
+            - Um sistema que fica analisando os erros e reiniciando as operações;
+
+            - Ou alguém manualmente corrigindo/reiniciando as operações.
+
+        - Qualquer sistema pode ter erros. Nesse caso, ao ocorrer o erro, deve-se jogar para um local onde é possível armazenar todos os erros para analisar caso a caso e para que nenhuma transação seja deixada para trás.
+
+## Draft de código
+
+```
+package main
+
+import {
+    "time"
+    "github.com/devfullcycle/go-saga/internal/saga"
+}
+
+func main() {
+    // criar pedido
+    step1 := &saga.SagaStep{
+        StepName:           "place-order",
+        StepTopic:          "place-order",
+        StepType:           saga.SagaStepTypeNormal,
+        Status:             saga.SagaStepStatusPending,
+        Data:               []byte("data"),
+        CompensateRetries   3
+    }
+
+    // geração de uma nota fiscal
+    step2 := &saga.SagaStep{
+        StepName:           "generate-invoice",
+        StepTopic:          "generate-invoice",
+        StepType:           saga.SagaStepTypeNormal,
+        Status:             saga.SagaStepStatusPending,
+        Data:               []byte("data"),
+        CompensateRetries   3
+    }
+
+    // remover produto do estoque
+    step3 := &saga.SagaStep{
+        StepName:           "remove-product-from-stock",
+        StepTopic:          "remove-product-from-stock",
+        StepType:           saga.SagaStepTypeNormal,
+        Status:             saga.SagaStepStatusPending,
+        Data:               []byte("data"),
+        CompensateRetries   3
+    }
+
+    // realizar o envio
+    step3 := &saga.SagaStep{
+        StepName:           "ship-order",
+        StepTopic:          "ship-order",
+        StepType:           saga.SagaStepTypeNormal,
+        Status:             saga.SagaStepStatusPending,
+        Data:               []byte("data"),
+        CompensateRetries   3
+    }
+
+    saga := &saga.Saga{
+        SagaID:                 "saga-1",
+        SagaName:               "saga-1",
+        Status:                 saga.SagaStepStatusPending,
+        CreateTime:             time.Now(),
+        UpdateTime:             time.Now(),
+        ExpireTime:             time.Now().Add(time.Hour * 24),
+        Version:                1
+    }
+
+    saga.AddStep(step1)
+    saga.AddStep(step2)
+    saga.AddStep(step3)
+    saga.AddStep(step4)
+
+    // lendo uma fila de mensagens
+    for {
+        saga.Init([]byte("data"))
+        // gerar um id para a saga/transação
+        // guardar o estado no banco de dados
+        // log de tudo que acontece
+    }
+}
+```
+
 
 
 
