@@ -47,7 +47,7 @@ No CQRS, estamos falando de algo mais arquitetural, porque, na metade do sistema
 
 Quando um comando é executado, esse comando vai ter que processar regras de negócio, falar com banco de dados, etc., então, quando o comando chega no sistema, ele vai interagir com o modelo de domínio, agregados, value objects, repositórios, para trabalhar com as informações do comando.
 
-Essa parte do sistema deveria ter uma modelagem rica de domínio, porque é a parte onde os dados são processados. Por exemplo, uma simulação de cálculo de juros. Então, é enviado um comando contendo quanto gostaria de financiar, em quantas vezes, passando por todas as regras de negócio e grava no banco de dados todas as parcelas de juros. 
+Essa parte do sistema deveria ter uma modelagem rica de domínio, porque é a parte onde os dados são processados. Por exemplo, uma simulação de cálculo de juros. Então, é enviado um comando contendo quanto gostaria de financiar, em quantas vezes, passando por todas as regras de negócio e gravando no banco de dados todas as parcelas de juros. 
 
 Quando é emitido esse comando e as parcelas são gravadas no banco de dados, acabou o processamento.
 
