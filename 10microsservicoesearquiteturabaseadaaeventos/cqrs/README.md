@@ -179,5 +179,49 @@ Desvantagem:
 ![Dual writes](/10microsservicoesearquiteturabaseadaaeventos/imagens/dual_writes.png)
 <p align="left">Fonte: Full Cycle, 2024.</p>
 
+- Temos um comando e esse comando vai gerar a gravação no banco de dados de escrita.
 
+- Porém, esse comando, internamente, pode gerar um evento interno no sistema para gravar em um banco de dados de leitura.
 
+- O mesmo sistema, durante o comando, grava ao mesmo tempo nesses dois lugares:
+
+    - Banco de dados de escrita;
+
+    - Banco de dados de leitura.
+
+- No momento em que é enviado o evento do mecanismo de gravação no banco de dados de escrita, também será gravado no banco de dados de leitura.
+
+    - Tendo algum problema para gravar no banco de dados de leitura, deve ser feito o rollback no banco de dados de escrita.
+
+    - Vão haver duas operações distintas em bancos de dados diferentes. Se uma falhar, a outra operação também precisa voltar atrás, porque esses bancos de dados não têm outro mecanismo de sincronização. Então, é necessário garantir que o dado seja gravado no banco de dados de escrita e leitura.
+
+### Change data capture (CDC)
+
+![Change data capture](/10microsservicoesearquiteturabaseadaaeventos/imagens/change_data_capture.png)
+<p align="left">Fonte: Full Cycle, 2024.</p>
+
+- O comando envia dados para o banco de dados de gravação.
+
+- Temos um sistema que fica lendo os logs do banco de dados de gravação, obtendo essas informações e gravando no banco de dados de leitura.
+
+Normalmente, CDC's são soluções prontas para ajudar a ter mais facilidade para trabalhar.
+
+Exemplo:
+
+- Kafka Connect:
+
+    - Tem um cluster rodando; 
+
+    - Tem um plugin, chamado Debezium, responsável por ficar lendo o banco de dados através de um conector source;
+
+    - Tem outro conector sink, aonde ele despeja os dados para o banco de dados de leitura.
+
+Vantagens e quando usar:
+
+- Para fazer integração entre sistemas, com gravação em múltiplos bancos de dados, vai facilitar todo o processo, porque foi projetado para isso.
+
+## Exemplo prático de commands
+
+``
+https://github.com/devfullcycle/cqrs
+``
