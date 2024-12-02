@@ -37,11 +37,11 @@ Pontos de partida:
 
 - No momento em que isso acontece, a aplicação mediadora começa a guardar estado, ou seja, a saga iniciou, o passo que ela iniciou foi o passo 1 e o status do primeiro passo é running, porque o passo começou a ser executado:
 
-``
+```
 SagaStatus = Started
 Step = 1
 StepStatus = Running
-``
+```
 
 - Lembrando que cada saga que inicia tem um id para identificação para separar uma saga da outra.
 
@@ -51,27 +51,27 @@ StepStatus = Running
 
 - A seguir, essa informação sobre o step 1 é consumida pela aplicação mediadora. Então, nesse momento, os dados da saga começam a mudar o estado. A saga, agora, está como running, para o step 1, o status foi sucesso e, agora, é setado o próximo step como 2, que vai começar a rodar:
 
-``
+```
 SagaStatus = Running
 Step = 1
 StepStatus = Succeeded
 
 Step = 2
 StepStatus = Pending
-``
+```
 
 - Quando o passo 2 começa a inicializar, ou seja, quando é enviado informação para o passo 2, temos uma publicação em um tópico para o microsserviço 2, que vai executar esse microsserviço 2.
 
 - Será processado com sucesso, vai avisar o step 2 que ele processou. Nesse momento, a nossa saga continua rodando, falando que o step 2 foi realizado com sucesso. E, agora, o próximo step que a gente vai ter é o step 3, que vai começar a rodar:
 
-``
+```
 SagaStatus = Running
 Step = 2
 StepStatus = Succeeded
 
 Step = 3
 StepStatus = Pending
-``
+```
 
 - Lembrando que uma operação só é executada após a outra.
 
@@ -87,40 +87,40 @@ StepStatus = Pending
 
 - Então, o próximo passo é a execução do microsserviço 3 novamente: step 3.
 
-``
+```
 SagaStatus = Compensating
 Step = 3
 StepStatus = Failed
 
 Step = 3
 StepStatus = Compensating
-``
+```
 
 - A seguir, no step 3, vai executar uma operação de compensação, ou seja, tudo que foi executado no step 3 vai voltar para garantir a consistência.
 
 - Seguindo para o próximo step, a saga tem ainda o status de compensando e o step 3 igual a compensated, ou seja, já foi compensado o step 3. E o próximo step é o 2 e o status está como compensando.
 
-``
+```
 SagaStatus = Compensating
 Step = 3
 StepStatus = Compensated
 
 Step = 1
 StepStatus = Compensating
-``
+```
 
 - A seguir, o step 2 recebe a informação, vai executar a transação de compensação. A informação vai voltar e o status da saga deve ser alterado novamente. O status da saga ainda está compensando e o step 2 já foi compensado. O último step é o 1 e deve estar compensando.
 
 - Então, a informação é enviada para o step 1. O microsserviço 1 executa a informação de compensação, retorna a informação para o step 1 e, agora, o status da saga muda para compensatedandcompleted, o que quer dizer que a saga, realmente, terminou. Mas terminou de forma compensada. Ou seja, não aconteceu o que era esperado, porque, caso contrário, o status da saga estaria como completed apenas:
 
-``
+```
 SagaStatus = CompensatedAndCompleted
 Step = 1
 StepStatus = Compensated
 
 Step = 1
 StepStatus = Compensated
-``
+```
 
 
 
