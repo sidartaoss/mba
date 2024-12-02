@@ -118,5 +118,66 @@ Existem alguns motivos para se trabalhar dessa forma:
 
 ## Mecanismos de sincronização
 
+Podemos ter diversos mecanismos de sincronização: alguns são muito simples e alguns são muito complexos.
+
+É importante saber qual mecanismo utilizar para, de forma intencional, saber a melhor forma de trabalhar no projeto.
+
+### Message queues or pub-sub system
+
+![Message queues or pub-sub system](/10microsservicoesearquiteturabaseadaaeventos/imagens/message_queues_pub_sub_system.png)
+<p align="left">Fonte: Full Cycle, 2024.</p>
+
+- Nesse mecanismo, temos o comando que vai gravar os dados no banco de dados de escrita, mas esse comando também vai gerar um evento;
+
+- Esse evento vai cair em um tópico;
+
+- O consumidor vai ler os dados desse tópico e vai gravar no banco de dados de leitura.
+
+Vantagens:
+
+- Isso é interessante, porque o consumidor, quando lê o evento, consegue obter o evento e gravar no banco de dados no melhor formato possível em termos de desempenho.
+
+- Também não tem perigo de perder dados durante a sincronização, porque estamos guardando as informações em um tópico. Então, caso o consumidor caia, quando ele subir novamente, ele vai ler o tópico e gravar no banco de dados. Permite bastante resiliência, porque a aplicação vai garantir que os dados não vão ser perdidos.
+
+Quando utilizar:
+
+- Quando é necessário garantir resiliência;
+
+- Quando é necessário garantir, de forma muito rápida, que o dado seja sincronizado, porque, normalmente, esses sistemas de mensageria e pub-sub têm latências muito baixas de 10 milissegundos ou até menos.
+
+### Scheduled synchronization jobs
+
+![Scheduled synchronization job](/10microsservicoesearquiteturabaseadaaeventos/imagens/scheduled_synchronization_job.png)
+<p align="left">Fonte: Full Cycle, 2024.</p>
+
+- O comando grava os dados no banco de dados de escrita;
+
+- Temos um job e um consumidor:
+
+    - De tempos em tempos, o consumidor vai ler o banco de dados de escrita e vai gravar no banco de dados de leitura;
+
+    - Exemplo: a cada 10 segundos, o job vai obter todos os dados que mudaram no banco de dados de escrita e vai jogar no banco de dados de leitura de uma vez (via consumidor).
+
+Vantagens:
+
+- Você não fica a todo momento batendo no banco de dados e não é necessário ficar disparando eventos para trabalhar.
+
+- Trabalhar dessa forma acaba sendo bastante simples e não é necessário um mecanismo de fila para trabalhar. A única coisa necessária é de um job que rode e obtenha os dados e guarde:
+
+    - É facil de implementar;
+
+    - Não é necessário gastar com infraestrutura, ter um sistema de filas, etc.
+
+Desvantagem:
+
+- Tempo de sincronização vai ser maior, conforme o intervalo de execução do job: a cada 10, 15,... segundos.
+
+É necessário saber o quão inconsistente o sistema pode estar entre a base de leitura e escrita. Às vezes, não tem problema o intervalo de tempo de inconsistência.
+
+### Dual writes
+
+![Dual writes](/10microsservicoesearquiteturabaseadaaeventos/imagens/dual_writes.png)
+<p align="left">Fonte: Full Cycle, 2024.</p>
+
 
 
