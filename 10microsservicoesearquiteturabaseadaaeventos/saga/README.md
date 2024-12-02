@@ -120,7 +120,7 @@ Step = 1
 StepStatus = Compensating
 ```
 
-- Então, a informação é enviada para o step 1. O microsserviço 1 executa a informação de compensação, retorna a informação para o step 1 e, agora, o status da saga muda para compensatedandcompleted, o que quer dizer que a saga, realmente, terminou. Mas terminou de forma compensada. Ou seja, não aconteceu o que era esperado, porque, caso contrário, o status da saga estaria como completed apenas:
+- Então, a informação é enviada para o step 1. O microsserviço 1 executa a informação de compensação, retorna a informação para o step 1 e, agora, o status da saga muda para compensatedandcompleted, o que quer dizer que a saga, realmente, terminou. Mas terminou de forma compensada. Ou seja, não aconteceu o que era esperado, pois, caso contrário, o status da saga estaria como completed apenas:
 
 ```
 SagaStatus = CompensatedAndCompleted
