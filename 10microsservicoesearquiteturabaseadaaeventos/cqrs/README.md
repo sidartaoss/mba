@@ -162,7 +162,7 @@ Vantagens:
 
 - Você não fica a todo momento batendo no banco de dados e não é necessário ficar disparando eventos para trabalhar.
 
-- Trabalhar dessa forma acaba sendo bastante simples e não é necessário um mecanismo de fila para trabalhar. A única coisa necessária é de um job que rode e obtenha os dados e guarde:
+- Trabalhar dessa forma acaba sendo bastante simples e não é necessário um mecanismo de fila para trabalhar. A única coisa necessária é de um job que rode, obtenha os dados e guarde:
 
     - É facil de implementar;
 
