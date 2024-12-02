@@ -247,12 +247,12 @@ Na camada de comando, temos:
 
     - Com relação ao dual write, quando é gerado a transação, é disparado um evento para que seja utilizado para gravação dos dados no banco de dados de leitura. Uma vez que o evento é preparado, ele é disparado para o sistema.
 
-![Método handle](/10microsservicoesearquiteturabaseadaaeventos/imagens/metodo_handle.png)
-<p align="left">Fonte: Full Cycle, 2024.</p>
-
     - Após disparar o evento, temos handler's que vão cuidar da operação quando o evento for disparado.
 
     - No caso do handler de produto criado, o handler grava no mongodb como banco de dados de leitura; o comando grava em um banco relacional como banco de dados de escrita e o handler grava em um banco orientado a documentos como banco de dados de leitura.
+
+![Método handle](/10microsservicoesearquiteturabaseadaaeventos/imagens/metodo_handle.png)
+<p align="left">Fonte: Full Cycle, 2024.</p>
 
 - Criou um comando;
 
