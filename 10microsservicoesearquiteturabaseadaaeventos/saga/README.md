@@ -268,7 +268,57 @@ func main() {
 
     - É similar a event sourcing: cada coisa que vai acontecendo, você consegue ver. E, se em algum momento a saga tiver um problema, pode-se dar um replay nos eventos para ver o que que acontece;
 
-    - É muito importante, por questões, inclusive, de auditoria, armazenar todos os estados de tudo o que acontece na saga.  
+    - É muito importante, por questões, inclusive, de auditoria, armazenar todos os estados de tudo o que acontece na saga.
+
+## AWS step functions
+
+Sistema de gerenciamento de fluxo para automatizar workflows.
+
+Consegue utilizar esses processos para orquestrar microsserviços.
+
+Consegue ser um orquestrador:
+
+- Tem todo o rastreio dos steps; o que acontece caso algo dê certo ou não der certo.
+
+Consegue desenhar todo o fluxo e, a cada fluxo que acontece, pode-se executar um evento.
+
+Na AWS, os eventos podem resultar na chamada de diversos serviços.
+
+Ao executar o step 1, se der certo: 
+
+- Mudar algo no DynamoDB.
+
+- Iniciar o AWS Elemental.
+
+- Começar a converter um bucket.
+
+Casos de uso:
+
+- Automatizar ETL;
+
+- Automatizar etapas de segurança;
+
+- Orquestrar microsserviços;
+
+    - Normalmente, step functions chama lambda functions, trabalhando serverless e, cada vez que uma coisa acontece, vai chamando uma função diferente.
+
+- Orquestrar diversos workloads em paralelo. As step functions conseguem executar tarefas em paralelo e, depois, é possível unificar todas as tarefas, rodar novamente em paralelo, etc.
+
+Desvantagem:
+
+- Alto custo, porque ela cobra por cada mudança de estado e não por cada transação iniciada: Do step 1 para o step 2, é cobrado; do step 2 para o step 3, é cobrado, e assim por diante...
+
+- No free tier, recebe-se 4000 mudanças de estado.
+
+Quando usar:
+
+Se você utiliza vários serviços da AWS, é possível integrar com diversos serviços, então, acaba ficando dentro de um ecossistema que facilita o desenvolvimento.
+
+Desvantagem:
+
+- Uma vez que você entra nesse fluxo e toda a sua operação está rodando dentro desse fluxo, acaba sendo difícil sair, ainda mais se são utilizados outros serviços.
+
+- Então, o lockin é extremamente forte.
 
 ### Referência
 MBA ARQUITETURA FULL CYCLE. Microsserviços e arquitetura baseada a eventos. 2024. Disponível em: https://plataforma.fullcycle.com.br/. Acesso em: 29 nov. 2024.
