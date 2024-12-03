@@ -300,7 +300,7 @@ Casos de uso:
 
 - Orquestrar microsserviços;
 
-    - Normalmente, step functions chama lambda functions, trabalhando serverless e, cada vez que uma coisa acontece, vai chamando uma função diferente.
+    - Normalmente, step functions chamam lambda functions, trabalhando serverless e, cada vez que uma coisa acontece, vai chamando uma função diferente.
 
 - Orquestrar diversos workloads em paralelo. As step functions conseguem executar tarefas em paralelo e, depois, é possível unificar todas as tarefas, rodar novamente em paralelo, etc.
 
