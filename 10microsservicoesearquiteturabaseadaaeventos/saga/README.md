@@ -269,3 +269,6 @@ func main() {
     - É similar a event sourcing: cada coisa que vai acontecendo, você consegue ver. E, se em algum momento a saga tiver um problema, pode-se dar um replay nos eventos para ver o que que acontece;
 
     - É muito importante, por questões, inclusive, de auditoria, armazenar todos os estados de tudo o que acontece na saga.  
+
+### Referência
+MBA ARQUITETURA FULL CYCLE. Microsserviços e arquitetura baseada a eventos. 2024. Disponível em: https://plataforma.fullcycle.com.br/. Acesso em: 29 nov. 2024.
