@@ -236,7 +236,36 @@ func main() {
     }
 }
 ```
+- Primeira coisa a ser feita na configuração de uma saga é a configurar os passos (steps).
 
+- Passo 1 criar o pedido. Passo 2 gera a nota fiscal. Passo 3 vai remover o produto do estoque. O passo 4 vai realizar o envio do produto.
 
+- Os passos são encadeados: se não conseguir realizar o envio do produto, vai ser necessário recolocar o produto no estoque, cancelar a nota fiscal e mudar o status da ordem com cancelado.
 
+- Um passo depende do outro e acontecem em momentos diferentes. A saga pode ficar em aberto até finalizar.
 
+- Para inicializar uma saga com um id e um nome. Ela contém dados de auditoria: CreateTime, UpdateTime e também ExpireTime: se, em 24 horas, não concluir com sucesso, vai compensar e finalizar.
+
+- Também é possível fazer o controle de versão da saga. A empresa muda a todo momento, então, é possível criar os passos (steps) e configurar qual a versão dessa saga, pois é possível ter várias versões de uma mesma saga.
+
+- E, a seguir, a saga vai adicionar todos os passos que são necessários para rodar essa saga.
+
+- Para cada transação que acontecer, vai ser executado um init, o qual vai injetar os dados iniciais da saga.
+
+- Imaginemos que está sendo lido uma fila de mensagens, tendo um for infinito lendo essa fila e, para cada transação que é recebida, os dados são jogados dentro da saga, a qual inicia baseado nos passos que foram configurados.
+
+- De forma geral, parece ser simples. O que não é simples são os microsserviços, as operações de compensação e, principalmente, o gerenciamento de estado da saga.
+
+- Quando é executado um init, normalmente:
+
+    - Será gerado um id para a saga/transação;
+
+    - Vai guardar o estado no banco de dados;
+
+    - Vai ficar fazendo o processamento;
+
+    - E, para cada etapa (step), vamos ter o log de tudo o que acontece. Ou seja, para cada momento, podemos ver passo-a-passo, pois, se tivermos uma transação com problema, podemos ver o histórico da transação; aonde começaram os problemas, aonde começou a compensar.
+
+    - É similar a event sourcing: cada coisa que vai acontecendo, você consegue ver. E, se em algum momento a saga tiver um problema, pode-se dar um replay nos eventos para ver o que que acontece;
+
+    - É muito importante, por questões, inclusive, de auditoria, armazenar todos os estados de tudo o que acontece na saga.  
