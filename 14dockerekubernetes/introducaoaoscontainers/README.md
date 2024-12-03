@@ -45,4 +45,70 @@ O que é:
 ![Hypervisor](/14dockerekubernetes/imagens/hypervisor-vmm.webp)
 <p align="left">Fonte: Full Cycle, 2024.</p>
 
+## Virtual machine monitor
+
+O que é:
+
+- Quando o hardware não está disponível diretamente na máquina virtual, o Virtual Machine Monitor (VMM) engana o sistema operacional convidado para que ele acredite que está sendo executado diretamente no hardware.
+
+- O VMM intercepta as instruções do sistema operacional convidado e as traduz para o hardware real.
+
+A VMM precisa satisfazer 3 propriedades:
+
+- Equivalência: Precisa ser o mesmo, com ou sem a virtualização. Isto significa que a maioria das instruções precisam ser executadas sem nenhuma tradução.
+
+- Performance: Precisa ser rápido o suficiente para não degradar o desempenho do sistema operacional convidado.
+
+- Isolamento: Precisa isolar os convidados uns dos outros.
+
+## Virtualização de memória
+
+O que é:
+
+- A virtualização de memória é uma técnica que permite que um sistema operacional convidado acesse a memória física do sistema.
+
+- O sistema operacional convidado acredita que está acessando a memória física, mas na verdade está acessando a memória virtual.
+
+Algumas técnicas de virtualização de memória:
+
+- Guest Virtual Memory: É o que o processo rodando consegue ver.
+
+- Guest Physical Memory: É o que o SO convidado consegue ver.
+
+- System Physical Memory: É o que o a VMM consegue ver.
+
+## Virtualização de cpu
+
+O que é:
+
+- A virtualização de CPU é uma técnica que permite que um sistema operacional convidado acesse a CPU do sistema.
+
+- O sistema operacional convidado acredita que está acessando a CPU, mas na verdade está acessando a CPU virtual.
+
+## Binary Translation
+
+O que é:
+
+- O SO convidado é usado sem nenhuma modificação.
+
+- As instruções do SO convidado são interceptadas e traduzidas para o hardware real.
+
+Desvantagem:
+
+- Isso causa uma degradação no desempenho.
+
+## Paravirtualização
+
+O que é:
+
+- Para resolver problemas de performance, o SO convidado é modificado para que ele saiba que está rodando em um ambiente virtualizado.
+
+- A interação do SO convidado com o host é otimizado para evitar a degradação de desempenho.
+
+Fontes:
+
+- Livro: Linux Containers and Virtualization (Shashank Mohan Jain)
+- https://en.wikipedia.org/wiki/Timeline_of_virtualization_development
+- https://en.wikipedia.org/wiki/Hypervisor
+- https://softwareengineering.stackexchange.com/questions/196405/how-did-the-term-hypervisor-come-into-use
 
