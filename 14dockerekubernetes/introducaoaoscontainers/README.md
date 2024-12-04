@@ -328,7 +328,7 @@ https://github.com/devfullcycle/mba-docker/blob/main/cap%2002%20-%20Mundo%20de%2
 
 - Docker engine: é uma arquitetura cliente-servidor, no final das contas, pois temos os comandos sendo executados, que vai, bate no daemon, pedindo alguma informação ou para fazer alguma coisa.
 
-![Arquitetura docker](/14dockerekubernetes/introducaoaoscontainers/README.md)
+![Arquitetura docker](/14dockerekubernetes/imagens/arquitetura_docker.png)
 <p align="left">Fonte: Full Cycle, 2024.</p>
 
 
