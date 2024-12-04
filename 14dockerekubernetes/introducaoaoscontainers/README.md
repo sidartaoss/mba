@@ -331,6 +331,26 @@ https://github.com/devfullcycle/mba-docker/blob/main/cap%2002%20-%20Mundo%20de%2
 ![Arquitetura docker](/14dockerekubernetes/imagens/arquitetura_docker.png)
 <p align="left">Fonte: Full Cycle, 2024.</p>
 
+Podemos ter um servidor do Docker rodando em uma outra máquina que está na rede ou em outro lugar, em qualquer parte do mundo e o CLI se conecta através de uma API. 
 
+O Docker Host vai gerenciando as imagens e containers e, quando o daemon precisar de uma imagem: o client solicitou para poder criar um container baseado no MySQL, o daemon olha para as imagens no docker host, caso não tenha, então, vai solicitar ao docker hub (registry) e puxar a imagem. 
 
+![Arquitetura docker 2](/14dockerekubernetes/imagens/arquitetura_docker_2.png)
+<p align="left">Fonte: Full Cycle, 2024.</p> 
 
+- Nós como usuários do Docker Client, ou poderia ser até outra aplicação como usuário do Docker Client, que são os comandos.
+
+- Vai se comunicando via API ou via socket, pois pode ter um .sock no Linux quando eles estão na mesma máquina, não tem necessidade de utilizar API, inclusive, acaba sendo mais rápido, o .sock é uma forma de processos se comunicarem sem ter que utilizar a rede.
+
+- Temos o daemon, que vai fazendo o gerenciamento.
+
+- Embaixo dele, temos o containerd, que se comunica com o containerd-shim e usa o runc para poder fazer a criação dos containers.
+
+![Arquitetura docker 3](/14dockerekubernetes/imagens/arquitetura_docker_3.png)
+<p align="left">Fonte: Full Cycle, 2024.</p> 
+
+- Então, o daemon está como se fosse um serviço que a docker está provendo para extrair a complexidade a partir do daemon para baixo.
+
+- É por isso que é bom ter um padrão, porque, como temos o containerd, se for necessário trocar o runc para outro ou o serviço do containerd-shim que vai organizar a criação dos containers e os gerenciamentos, é possível fazer a troca, sem que isso afete a infraestrutura.
+
+- Resumindo: nós temos uma arquitetura cliente-servidor, que está fazendo as chamadas e o runc está rodando lá para fazer a criação dos containers.
