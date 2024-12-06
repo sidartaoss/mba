@@ -278,6 +278,7 @@ Essa publicação de portas é muito comum, podemos rodar um banco de dados:
 
 - docker run --rm --name mysql1 -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root mysql:8.0.30-debian
 
-
+### Referência
+MBA ARQUITETURA FULL CYCLE. Docker & Kubernetes. 2024. Disponível em: https://plataforma.fullcycle.com.br/. Acesso em: 05 dez. 2024.
 
 

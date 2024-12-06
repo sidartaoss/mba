@@ -354,3 +354,6 @@ O Docker Host vai gerenciando as imagens e containers e, quando o daemon precisa
 - É por isso que é bom ter um padrão, porque, como temos o containerd, se for necessário trocar o runc para outro ou o serviço do containerd-shim que vai organizar a criação dos containers e os gerenciamentos, é possível fazer a troca, sem que isso afete a infraestrutura.
 
 - Resumindo: nós temos uma arquitetura cliente-servidor, que está fazendo as chamadas e o runc está rodando lá para fazer a criação dos containers.
+
+### Referência
+MBA ARQUITETURA FULL CYCLE. Docker & Kubernetes. 2024. Disponível em: https://plataforma.fullcycle.com.br/. Acesso em: 05 dez. 2024.
