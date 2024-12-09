@@ -6,5 +6,5 @@ https://github.com/devfullcycle/mba-docker/blob/main/cap%2006%20-%20Volumes/01%2
 
 [Criando volumes pelo volume create](/14dockerekubernetes/volumes/criandovolumespelovolumecreate/README.md)
 
-
+[Criando volumes automaticamente](/14dockerekubernetes/volumes/criandovolumesautomaticamente/README.md)
 
