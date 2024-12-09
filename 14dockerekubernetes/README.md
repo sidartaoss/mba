@@ -9,3 +9,5 @@
 [As instruções RUN, COPY e CMD](/14dockerekubernetes/instrucoesruncopyexposecmd/README.md)
 
 [Docker compose](/14dockerekubernetes/dockercompose/README.md)
+
+[Primeiro exemplo com docker compose](/14dockerekubernetes/primeiroexemplocomdockercompose/README.md)
