@@ -84,3 +84,14 @@ Se editar no volume, é editado automaticamente no container.
 O Docker trabalha com padrões: cached, delegated e consistente (padrão).
 
 No modo consistente, se escrever algo no volume, já está disponível no container e vice-versa: se escreve algo no container, já está disponível no volume; existe esse sincronismo e vai garantir, às vezes, que se tenha mais performance, porque, muitas vezes, não é necessário ter o dado na máquina na hora: pode escrever no container e, depois, vai se sincronizando.
+
+
+## Administrando volumes
+
+https://github.com/devfullcycle/mba-docker/blob/main/cap%2006%20-%20Volumes/04-Administrando%20volumes.md
+
+
+## Performance em volumes
+
+https://github.com/devfullcycle/mba-docker/blob/main/cap%2006%20-%20Volumes/05-Performance%20em%20montagem%20de%20volumes.md
+
